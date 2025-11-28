@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aesthetic UI — Demo</title>
+
+  <!-- Google Font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== Root variables (ubah palet di sini) ========== */
+    :root{
+      /* main palette */
+      --bg-1: #0f1724;      /* deep navy */
+      --bg-2: #0b1020;      /* very deep */
+      --glass: rgba(255,255,255,0.06);
+      --accent-1: #7b61ff;  /* purple */
+      --accent-2: #4be1c1;  /* aqua */
+      --accent-3: #ffd36e;  /* warm yellow */
+      --muted: #98a0b3;
+      --card-bg: rgba(255,255,255,0.03);
+      --radius: 16px;
+      --glass-blur: 10px;
+      --glass-border: rgba(255,255,255,0.06);
+      --glass-highlight: rgba(255,255,255,0.02);
+      --shadow-1: 0 6px 20px rgba(2,6,23,0.6);
+      --max-width: 1100px;
+    }
+
+    /* Support light mode override (kece juga) */
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg-1: #f6f7fb;
+        --bg-2: #eef1f8;
+        --glass: rgba(255,255,255,0.7);
+        --card-bg: rgba(255,255,255,0.9);
+        --muted: #65748b;
+        --shadow-1: 0 10px 30px rgba(12,20,40,0.08);
+      }
+    }
+
+    /* ========== Global reset & base ========== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: white;
+      background:
+        radial-gradient(1200px 400px at 10% 10%, rgba(123,97,255,0.12), transparent 8%),
+        radial-gradient(900px 300px at 90% 90%, rgba(75,225,193,0.08), transparent 10%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:48px 24px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    /* Container */
+    .wrap{
+      width:100%;
+      max-width: var(--max-width);
+      margin:0 auto;
+    }
+
+    /* ========== Header / Hero ========== */
+    .hero{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      justify-content:space-between;
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:28px;
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow-1);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      margin-bottom:28px;
+    }
+
+    .hero-left{
+      flex:1 1 60%;
+      min-width:260px;
+    }
+    .kicker{
+      display:inline-block;
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      color:var(--muted);
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:12px;
+    }
+    h1{
+      margin:0 0 12px 0;
+      font-size: clamp(20px, 3.6vw, 36px);
+      line-height:1.05;
+      letter-spacing:-0.02em;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    p.lead{
+      margin:0;
+      color:var(--muted);
+      max-width:60ch;
+    }
+
+    .hero-actions{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      text-decoration:none;
+      border:1px solid transparent;
+      transition: transform .18s ease, box-shadow .18s ease;
+      user-select:none;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color: #071026;
+      box-shadow: 0 8px 28px rgba(75,225,193,0.12);
+    }
+    .btn-ghost{
+      background: transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+    }
+
+    /* Hero visual */
+    .hero-visual{
+      flex: 0 0 320px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+    }
+    .card-blob{
+      width:320px;
+      height:180px;
+      border-radius:18px;
+      background: linear-gradient(135deg, rgba(123,97,255,0.14), rgba(75,225,193,0.08));
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 12px 40px rgba(2,6,23,0.55);
+      position:relative;
+      overflow:hidden;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .blob-circle{
+      position:absolute;
+      right:-60px;
+      top:-40px;
+      width:200px;height:200px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), transparent 30%);
+      filter: blur(18px);
+      transform:rotate(12deg);
+    }
+    .mini-stack{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .chip{
+      background: rgba(255,255,255,0.03);
+      padding:6px 10px;
+      border-radius:10px;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    /* ========== Cards grid ========== */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+    .card{
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding:16px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(calc(var(--glass-blur) - 4px));
+      box-shadow: 0 8px 30px rgba(2,6,23,0.5);
+      transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+      min-height:120px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .card:hover{
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 18px 48px rgba(2,6,23,0.65);
+    }
+    .card h3{
+      margin:0;
+      font-size:16px;
+    }
+    .card p{ margin:0; color:var(--muted); font-size:14px; }
+
+    /* small badges */
+    .badge{
+      display:inline-block;
+      padding:6px 8px;
+      border-radius:999px;
+      font-size:12px;
+      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color:#071026;
+      font-weight:700;
+    }
+
+    /* footer */
+    footer{
+      margin-top:26px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      opacity:0.9;
+    }
+
+    /* ========== Micro animations ========== */
+    @keyframes floaty {
+      0%{ transform: translateY(0) }
+      50%{ transform: translateY(-8px) }
+      100%{ transform: translateY(0) }
+    }
+    .float{
+      animation: floaty 6s ease-in-out infinite;
+    }
+
+    /* responsive tweaks */
+    @media (max-width:880px){
+      .hero{flex-direction:column; align-items:stretch}
+      .hero-visual{order:-1; justify-content:flex-start}
+      .card-blob{width:100%; height:160px}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <div class="kicker">Aesthetic UI · Demo</div>
+        <h1 id="hero-title">Palet warna modern — glassmorphism & soft gradients</h1>
+        <p class="lead">
+          Template sederhana ini menunjukkan kombinasi gradien lembut, efek kaca (glassmorphism), dan micro-animasi.
+          Cocok untuk landing kecil, portofolio, atau hero section proyekmu. Ubah variabel di <code>:root</code> untuk kustomisasi palet.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#" title="Primary action">Get started</a>
+          <a class="btn btn-ghost" href="#" title="Secondary">Explore styles</a>
+          <span style="margin-left:6px;color:var(--muted);font-size:13px">• Customize colors in <code>:root</code></span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="card-blob float" role="img" aria-label="aesthetic visual">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="mini-stack">
+              <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#071026">QL</div>
+              <div>
+                <div style="font-weight:700">Aesthetic Kit</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px">UI snippets</div>
+              </div>
+            </div>
+            <div class="chip">v1.0</div>
+          </div>
+
+          <div style="display:flex;gap:10px;align-items:center;justify-content:flex-start;">
+            <div style="flex:1">
+              <div style="height:8px;border-radius:8px;background:linear-gradient(90deg,var(--accent-1),var(--accent-3));margin-bottom:8px"></div>
+              <div style="height:8px;border-radius:8px;background:linear-gradient(90deg,var(--accent-2),rgba(255,255,255,0.02));width:70%"></div>
+            </div>
+            <div style="width:64px;text-align:right;font-size:12px;color:var(--muted)">Design</div>
+          </div>
+
+          <div class="blob-circle"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section aria-label="Features">
+      <div class="grid">
+        <article class="card">
+          <h3>Glass Cards</h3>
+          <p>Gunakan kombinasi border, blur, dan transparansi untuk efek 'kaca' modern yang halus.</p>
+          <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+            <span class="badge">UI</span>
+            <small style="color:var(--muted)">Reusable component</small>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Gradients halus</h3>
+          <p>Gradient diagonal lembut membuat tampilan hidup tanpa mengganggu konten teks.</p>
+          <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+            <span class="badge">Color</span>
+            <small style="color:var(--muted)">Palette friendly</small>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Micro motion</h3>
+          <p>Animasi kecil (float, hover lift) memperkaya interaksi dan memberi kesan premium.</p>
+          <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+            <span class="badge">Motion</span>
+            <small style="color:var(--muted)">Subtle & smooth</small>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Responsive</h3>
+          <p>Grid adaptif dan ukuran font yang fleksibel agar tampil baik di ponsel & desktop.</p>
+          <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center">
+            <span class="badge">Layout</span>
+            <small style="color:var(--muted)">Mobile first</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      Dibuat untuk inspirasi — ubah <code>:root</code> untuk kustomisasi cepat • © Aesthetic Demo
+    </footer>
+
+  </div>
+</body>
+</html>
